@@ -17,6 +17,21 @@ import styled from "styled-components/native"
 //_________________________________________________
 
 
+//TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+/* theme = {
+  colors,
+  space,
+  lineHeights,
+  sizes,
+  fonts,
+  fontSizes,
+  fontWeights,
+};*/
+//HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+
+
+
 const ResInfo = ({restaurant = {} }) => {
 
     const {
@@ -33,19 +48,33 @@ const ResInfo = ({restaurant = {} }) => {
 const Title=styled.Text`
     font-size:20px;
     font-weight:bold;
-    color:red;
+    color: ${props=>props.theme.colors.ui.primary};
   `;
+
+const RestaurantCard = styled(Card)`
+    
+    background-color: white;
+    justify-content: center;
+    padding: 10px;
+    marginBottom: ${props=>props.theme.space[3]};
+
+    `;
+
+const RestaurantCardCover = styled(Card.Cover)`
+    padding: 20px;
+    background-color:white;
+`;
 
   return(
     
 
    
     <View style={styles.BottomView}>
-      <Card elevation={15} style={styles.cardStyle}>
-            <Card.Cover key={name} style={styles.coverStyle} source={{uri: photos[0] }} />
+      <RestaurantCard elevation={15} style={styles.cardStyle}>
+            <RestaurantCardCover key={name} style={styles.coverStyle} source={{uri: photos[0] }} />
             <Title> {name} </Title>
 
-      </Card>
+      </RestaurantCard>
     </View>
 
    
@@ -64,19 +93,7 @@ const styles = StyleSheet.create({
       width: "95%",
     
     },
-    cardStyle:{
-        padding: 10,
-        backgroundColor: 'white',
-       
-        justifyContent: 'center',
-        
-        
-    },
-    coverStyle: {
-   
-        padding: 20,
-        backgroundColor: 'white',        
-    },
+
 
   
   

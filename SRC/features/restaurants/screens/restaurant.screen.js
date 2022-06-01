@@ -5,6 +5,8 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ResInfo from "../component/restaurant-info.components.js";
 
+import styled from "styled-components/native"
+
 import { 
   StyleSheet,
   Text,
@@ -12,6 +14,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  FlatList
  
 
 } from 'react-native';
@@ -20,49 +23,63 @@ import {
   Searchbar
 } from "react-native-paper";
 
-const RS = () => {
+//_________________________________________________________
+
+const AIcontainer= styled.SafeAreaView`
+flex:1;
+background-color: ${Platform.OS === 'android'? 'green':'red'};
+align-items: center;
+justify-content: center;
+paddingTop: ${Platform.OS === 'android' ? StatusBar.currentHeight : 0}px;
+width: 100%;
+`;
+
+const UpperView= styled.View`
+
+flex:0.05;
+background-color: pink;
+width: 100%;
+align-items: center;
+justify-content: center;
+
+`;
+
+const RestaurantScreen = () => {
 
 
   return(
-    <SafeAreaView style={Platform.OS === 'android'?styles.A_container:styles.I_container }>
+    <AIcontainer>
 
     
-    <View style={styles.UpperView}>
-    <Searchbar />
-    </View>
+    <UpperView>
+
+      <Searchbar />
+
+    </UpperView>
 
     <View style={{height:20, backgroundColor:"skyblue"}}></View>
    
-    <ResInfo />
+    <FlatList 
+      data={ [{name:1 } , {name:2}, {name:3}, {name:4}, {name:5}, {name:6}] }
+      renderItem= {() => <ResInfo /> }
+      keyExtractor={(item) => item.name}
+      contentContainerStyle= {{paddingLeft:'5%'}}
+      style={{flex:1,width:'100%'}}
+      />
 
-    </SafeAreaView>
+    
+
+    </AIcontainer>
   )   
 }
 
-export default RS;
+export default RestaurantScreen;
 
 const styles = StyleSheet.create({
-    I_container: {
-      flex: 1,
-      backgroundColor: 'orange',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: 0
-    },
-    A_container: {
-      flex: 1,
-      backgroundColor: 'green',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: StatusBar.currentHeight,
-    },
+    
     UpperView: {
      
-      flex:0.05,
-      backgroundColor: 'pink',
-      width: "100%",
-      alignItems: 'center',
-      justifyContent: 'center',
+      
       
     
     },
